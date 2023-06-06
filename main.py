@@ -84,9 +84,12 @@ def save_fig(braking):
 # API
 
 
+HOST = "192.168.43.67"
+
+
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html')
+    return render_template('index.html', app={'host': HOST})
 
 
 @app.route('/analyze', methods=['POST'])
@@ -108,4 +111,5 @@ def analyze():
 
 # plt.show()
 if __name__ == '__main__':
-    app.run(debug=True, port=8000)
+
+    app.run(host=HOST, port=8000)
