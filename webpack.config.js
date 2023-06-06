@@ -14,12 +14,12 @@ module.exports = {
   ],
 
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'static/dist'),
     filename: 'main.js',
   },
   devServer: {
     static: {
-      directory: path.resolve(__dirname, ''),
+      directory: path.resolve(__dirname, 'templates'),
     },
     port: 3000,
     open: true,

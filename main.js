@@ -39,15 +39,15 @@ function App() {
 
 
           <div className='relative'>
-            <input type="number" className='form-control peer' name='budget' required id='budget' placeholder='' />
+            <input type="number" className='form-control peer' name='budget' required id='budget' placeholder=' ' />
             <label for="budget" className='input-label'>Budget (Juta)</label>
           </div>
           <div className='relative'>
-            <input type="number" className='form-control peer' name='jarak' required id='jarak' placeholder='' />
+            <input type="number" className='form-control peer' name='jarak' required id='jarak' placeholder=' ' />
             <label for="jarak" className='input-label'>Jarak (Km)</label>
           </div>
           <div className='relative'>
-            <input type="number" className='form-control peer' name='durasi' required id='durasi' placeholder='' />
+            <input type="number" className='form-control peer' name='durasi' required id='durasi' placeholder=' ' />
             <label for="durasi" className='input-label'>Durasi (Jam)</label>
           </div>
           <div className='grid grid-cols-2 gap-2 relative'>
