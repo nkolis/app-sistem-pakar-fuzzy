@@ -10,8 +10,8 @@ function App() {
   const [host, setHost] = useState('')
 
   useEffect(() => {
-    const ip = document.getElementById('host');
-    setHost(ip.value)
+    const endpoint = new URL(window.location.href).origin;
+    setHost(endpoint)
   }, []);
 
   async function analize(el) {
@@ -21,7 +21,7 @@ function App() {
     setKondisi(null)
 
 
-    const request = await fetch(`http://${host}:8000/analyze`, {
+    const request = await fetch(`${host}/analyze`, {
       method: 'POST',
       body: formData,
 
