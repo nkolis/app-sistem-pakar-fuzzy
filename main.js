@@ -70,13 +70,10 @@ function App() {
         </form>
       </section>
       <div className='max-w-[500px] mt-5 mb-10 mx-auto p-4'>
-        {!kondisi[0].error ?
+        {kondisi &&
           <>
             <p className='text-slate-600'>Persentase Kemungkinan: <span className='text-sky-700 inline-block'>{kondisi[0].persentase}%</span></p>
             <img src={`data:image/png;base64,${kondisi[0].path_graph}`} alt="Graphics" className='w-full' />
-          </> :
-          <>
-            <p className='text-red-500 text-center'>Gagal menganilasa, silakan ulangi kembali!</p>
           </>
         }
       </div>
