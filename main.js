@@ -45,15 +45,15 @@ function App() {
       <section className='mx-auto mt-5 sm:max-w-full md:max-w-[500px]'>
         <form action="" onSubmit={analize.bind(this)} className='w-full shadow-lg rounded-lg border px-5 py-6 grid grid-cols-1 gap-14'>
           <div className='relative'>
-            <input type="number" className='form-control peer' name='budget' required id='budget' placeholder=' ' />
+            <input type="number" className='form-control peer' name='budget' required id='budget' placeholder=' ' step='0.1' />
             <label for="budget" className='input-label'>Budget (Juta)</label>
           </div>
           <div className='relative'>
-            <input type="number" className='form-control peer' name='jarak' required id='jarak' placeholder=' ' />
+            <input type="number" className='form-control peer' name='jarak' required id='jarak' placeholder=' ' step='0.1' />
             <label for="jarak" className='input-label'>Jarak (Km)</label>
           </div>
           <div className='relative'>
-            <input type="number" className='form-control peer' name='durasi' required id='durasi' placeholder=' ' />
+            <input type="number" className='form-control peer' name='durasi' required id='durasi' placeholder=' ' step='0.1' />
             <label for="durasi" className='input-label'>Durasi (Jam)</label>
           </div>
           <div className='grid grid-cols-1 md:grid-cols-2 sm:gap-2 md:gap-4'>
@@ -72,7 +72,7 @@ function App() {
       <div className='max-w-[500px] mt-5 mb-10 mx-auto p-4'>
         {kondisi &&
           <>
-            <p className='text-slate-600'>Persentase Kemungkinan: <span className='text-sky-700 inline-block'>{kondisi[0].persentase}%</span></p>
+            <p className='text-slate-600'>Persentase: <span className='text-sky-700 inline-block'>{kondisi[0].persentase}%</span> <span className='text-slate-800 font-semibold'>({kondisi[0].hasil})</span></p>
             <img src={`data:image/png;base64,${kondisi[0].path_graph}`} alt="Graphics" className='w-full' />
           </>
         }

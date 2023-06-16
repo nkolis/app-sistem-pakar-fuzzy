@@ -70,22 +70,11 @@ def aturan():
                        durasi['lama'], kondisi['memungkinkan'])
     kondisi_ctrl = ctrl.ControlSystem(
         [rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8, rule9, rule10, rule11, rule12])
+
     braking = ctrl.ControlSystemSimulation(kondisi_ctrl)
+
     return {'budget': budget, 'jarak': jarak, 'durasi': durasi, 'kondisi': kondisi, 'braking': braking}
 
-
-def save_fig(brak, kond):
-    img = BytesIO()
-
-    kond.view(sim=brak)
-    plt.show()
-    plt.savefig(img, format='png')
-    img.seek(0)
-    plt.close()
-    img_base64 = base64.b64encode(img.getvalue()).decode('utf-8')
-    img.close()
-
-    return img_base64
 
 # API
 
@@ -99,9 +88,9 @@ def index():
 @cross_origin()
 def analyze():
 
-    budget_value = int(request.form.get('budget'))
-    jarak_value = int(request.form.get('jarak'))
-    durasi_value = int(request.form.get('durasi'))
+    budget_value = float(request.form.get('budget'))
+    jarak_value = float(request.form.get('jarak'))
+    durasi_value = float(request.form.get('durasi'))
 
     rule = aturan()
     braking = rule['braking']
@@ -111,14 +100,28 @@ def analyze():
     braking.input['jarak'] = jarak_value
     braking.input['durasi'] = durasi_value
     braking.compute()
+
     try:
+
         img = BytesIO()
         kondisi.view(sim=braking)
+
         plt.savefig(img, format='png')
         img.seek(0)
         img_base64 = base64.b64encode(img.getvalue()).decode('utf-8')
         img.close()
-        return [{'persentase': f"{braking.output['kondisi']:.2f}", 'path_graph': img_base64}]
+
+        persentase_output = braking.output['kondisi']
+
+        def hasil(persentase):
+            if persentase >= 75:
+                return 'Memungkinkan'
+            elif persentase >= 30:
+                return 'Kurang Memungkinkan'
+            else:
+                return 'Tidak Memungkinkan'
+
+        return [{'persentase': f"{persentase_output:.2f}", 'hasil': hasil(persentase_output), 'path_graph': img_base64}]
     except AttributeError as e:
         return [{'error': str(e)}]
 
@@ -126,4 +129,4 @@ def analyze():
 # plt.show()
 if __name__ == '__main__':
 
-    app.run(host='0.0.0.0', port=8000)
+    app.run(debug=True, host='0.0.0.0', port=8000)
